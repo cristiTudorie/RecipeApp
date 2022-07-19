@@ -5,22 +5,22 @@ import { ShoppingListService } from './shopping-list.service';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styles: []
+  styles: [],
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Ingredient[] = [];
   private igchangeSub: Subscription;
 
-  constructor(private shoppingListService: ShoppingListService) {
-
-  }
+  constructor(
+    private shoppingListService: ShoppingListService
+  ) {}
 
   ngOnInit(): void {
     this.ingredients = this.shoppingListService.getIngredients();
-    this.igchangeSub = this.shoppingListService.ingredientsChanged
-    .subscribe(
-      (ingredients: Ingredient[]) => this.ingredients = ingredients
-    )
+    this.igchangeSub = this.shoppingListService.ingredientsChanged.subscribe(
+      (ingredients: Ingredient[]) => (this.ingredients = ingredients)
+    );
+
   }
 
   onEditItem(index: number) {
